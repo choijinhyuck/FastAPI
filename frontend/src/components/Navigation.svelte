@@ -1,11 +1,27 @@
 <script>
   import { link } from "svelte-spa-router";
+  import { page, access_token, username, is_login } from "../lib/store";
+  import moment from "moment/min/moment-with-locales";
+  moment.locale("ko");
+
+  let current = moment().format("LLLL");
+  setInterval(() => {
+    current = moment().format("LLLL");
+  }, 1000);
 </script>
 
 <!-- 네비게이션바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
   <div class="container-fluid">
-    <a use:link class="navbar-brand" href="/">Pybo</a>
+    <a
+      use:link
+      class="navbar-brand"
+      href="/"
+      on:click={() => {
+        $page = 0;
+      }}>Pybo</a
+    >
+    <span class="navbar-text"> {current} </span>
     <button
       class="navbar-toggler"
       type="button"
@@ -19,12 +35,27 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a use:link class="nav-link" href="/user-create">회원가입</a>
-        </li>
-        <li class="nav-item">
-          <a use:link class="nav-link" href="/user-login">로그인</a>
-        </li>
+        {#if $is_login}
+          <li class="nav-item">
+            <a
+              use:link
+              href="/user-login"
+              class="nav-link"
+              on:click={() => {
+                $access_token = "";
+                $username = "";
+                $is_login = false;
+              }}>로그아웃 ({$username})</a
+            >
+          </li>
+        {:else}
+          <li class="nav-item">
+            <a use:link class="nav-link" href="/user-create">회원가입</a>
+          </li>
+          <li class="nav-item">
+            <a use:link class="nav-link" href="/user-login">로그인</a>
+          </li>
+        {/if}
       </ul>
     </div>
   </div>
