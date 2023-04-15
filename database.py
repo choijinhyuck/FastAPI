@@ -1,10 +1,11 @@
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from starlette.config import Config
 
-from url_list import DB_url
 
-SQLALCHEMY_DATABASE_URL = DB_url
+config = Config(".env")
+SQLALCHEMY_DATABASE_URL = config("SQLALCHEMY_DATABASE_URL")
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

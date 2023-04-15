@@ -1,6 +1,12 @@
 <script>
   import { link } from "svelte-spa-router";
-  import { page, access_token, username, is_login } from "../lib/store";
+  import {
+    page,
+    keyword,
+    access_token,
+    username,
+    is_login,
+  } from "../lib/store";
   import moment from "moment/min/moment-with-locales";
   moment.locale("ko");
 
@@ -18,7 +24,7 @@
       class="navbar-brand"
       href="/"
       on:click={() => {
-        $page = 0;
+        ($keyword = ""), ($page = 0);
       }}>Pybo</a
     >
     <span class="navbar-text"> {current} </span>
