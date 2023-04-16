@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Table
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 from database import Base
 
@@ -37,7 +37,7 @@ class Answer(Base):
     content = Column(Text, nullable=False)
     create_date = Column(DateTime, nullable=False)
     question_id = Column(Integer, ForeignKey("question.id"))
-    question = relationship("Question", backref="answers")
+    question = relationship("Question", backref=backref("answer", cascade="all,delete"))
     user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
     user = relationship("User", backref="answer_users")
     modify_date = Column(DateTime, nullable=True)
