@@ -37,7 +37,7 @@ class Answer(Base):
     content = Column(Text, nullable=False)
     create_date = Column(DateTime, nullable=False)
     question_id = Column(Integer, ForeignKey("question.id"))
-    question = relationship("Question", backref=backref("answer", cascade="all,delete"))
+    question = relationship("Question", backref=backref("answers", cascade="all,delete"))
     user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
     user = relationship("User", backref="answer_users")
     modify_date = Column(DateTime, nullable=True)
