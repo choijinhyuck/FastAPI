@@ -25,7 +25,7 @@
       href="/"
       on:click={() => {
         ($keyword = ""), ($page = 0);
-      }}>Pybo</a
+      }}>Main</a
     >
     <span class="navbar-text"> {current} </span>
     <button
@@ -41,6 +41,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="https://flask.메모.웹.한국/weather">날씨</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://flask.메모.웹.한국/pdf">PDF</a>
+        </li>
         {#if $is_login}
           <li class="nav-item">
             <a
